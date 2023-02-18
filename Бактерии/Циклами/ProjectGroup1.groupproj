@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{71BCFB3E-1D0B-445A-B533-3C7EED92B402}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Бактерии_Циклы.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\По Бине\Бактерии.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Бактерии_Циклы">
+        <MSBuild Projects="Бактерии_Циклы.dproj"/>
+    </Target>
+    <Target Name="Бактерии_Циклы:Clean">
+        <MSBuild Projects="Бактерии_Циклы.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Бактерии_Циклы:Make">
+        <MSBuild Projects="Бактерии_Циклы.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Бактерии">
+        <MSBuild Projects="..\По Бине\Бактерии.dproj"/>
+    </Target>
+    <Target Name="Бактерии:Clean">
+        <MSBuild Projects="..\По Бине\Бактерии.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Бактерии:Make">
+        <MSBuild Projects="..\По Бине\Бактерии.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Бактерии_Циклы;Бактерии"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Бактерии_Циклы:Clean;Бактерии:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Бактерии_Циклы:Make;Бактерии:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

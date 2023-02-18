@@ -1,0 +1,129 @@
+program Бактерии_Циклы;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils;
+
+
+
+var Red, Green, SumGreen, SumRed, SumAll, N, I : integer;
+    E, P : boolean;
+    // Red, Green - amount of red and green bacteria
+    // SumGreen, SumRed - sum of green and red bacteria
+    // SumAll - sum of green and red bacteria together
+    // N - amount of time cycles
+    // I - auxiliary variable
+    // E, P - checking value
+
+begin
+// For case of overflow
+Repeat
+  // Requesting and obtaining the initial amount of bacteria and time cycles
+  Repeat
+    Try
+      Write('Введите кол-во бактерий красного и зеленого');
+      Writeln(' цветов соответственно: ');
+      Readln(Red, Green);
+
+      // Rerequesting and reobtaining the initial amount of bacteria
+      // if amount isn't right
+      While (Red <= -1) or (Green <= -1) do
+        Begin
+        Write('Введите кол-во бактерий красного и зеленого');
+        Writeln(' цветов соответственно: ');
+        Readln(Red, Green);
+       End;
+
+      Writeln('Введите кол-во тактов времени (до 40): ');
+      Readln(N);
+
+      // Rerequesting and reobtaining the initial amount of time
+      // cycles if amount isn't right
+      While (N < 0) do
+        Begin
+        Writeln('Введите кол-во тактов времени (до 40): ');
+        Readln(N);
+        End;
+
+      // Except repeat
+      E := True;
+    except
+      Writeln('Введены некорректные данные!');
+      Writeln('');
+
+      // Go to repeat
+      E := False;
+    End;
+
+  Until E;
+
+  Writeln('');
+  Writeln('Идёт подсчёт числа бактерий... ');
+  Writeln('');
+
+  SumGreen := Green;
+  SumRed := Red;
+  I := 1;
+
+  // If we have only red bacteria
+  if Green = 0 then
+  Begin
+
+    // Conduction the first time cycle
+    SumGreen := Red;
+    SumRed := 0;
+
+    // As in this condition we conducted the first time cycle
+    // It's necessery to diminish the value of time cycles by one
+    N := N-1;
+  End;
+
+  // Checking for overflow of Integer type and implementetion dividing
+  // amount of time cucles of bacteria under gaven
+  while (SumGreen >= 0) and (SumRed >= 0) and (I <= N) do
+   Begin
+    SumGreen := SumGreen + SumRed;
+    SumRed := SumGreen - SumRed;
+
+    SumAll := SumGreen + SumRed;
+
+    //I := I + 1;
+   End;
+
+
+
+  // Values output
+  if (SumGreen >= 0) and (SumRed >= 0) then
+    Begin
+      Writeln('Количество зеленых: ', SumGreen);
+      Writeln('Количество красных: ', SumRed);
+      Writeln('');
+      Writeln('Расчёт окончен...');
+      Writeln('');
+      Write('После ', N, ' тактов времени из ', Red);
+      Write(' красных и ', Green, ' зеленых бактерий ');
+      Writeln('образовалось ', SumAll, ' бактерий в сумме');
+
+      // The overflow isn't here
+      P:= True;
+    End
+  else
+    Begin
+      Writeln('Произошло переполнение, попробуйте значения меньше');
+      Writeln('');
+      Writeln('Последние положительные значения (', I,' такте):');
+      Writeln('Количество зеленых: ', SumRed);
+      Writeln('Количество красных: ', (SumGreen - SumRed));
+
+      // The overflow is here
+      P:= False;
+    End;
+
+    Writeln('');
+Until P;
+
+readln;
+end.

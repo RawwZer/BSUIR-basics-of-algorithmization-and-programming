@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A023E8E9-479A-433D-A442-DF58846C006D}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Бактерии.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Монахи\Монахи.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Бактерии">
+        <MSBuild Projects="Бактерии.dproj"/>
+    </Target>
+    <Target Name="Бактерии:Clean">
+        <MSBuild Projects="Бактерии.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Бактерии:Make">
+        <MSBuild Projects="Бактерии.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Монахи">
+        <MSBuild Projects="..\Монахи\Монахи.dproj"/>
+    </Target>
+    <Target Name="Монахи:Clean">
+        <MSBuild Projects="..\Монахи\Монахи.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Монахи:Make">
+        <MSBuild Projects="..\Монахи\Монахи.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Бактерии;Монахи"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Бактерии:Clean;Монахи:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Бактерии:Make;Монахи:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
