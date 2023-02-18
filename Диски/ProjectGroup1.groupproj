@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0D7ECA8C-4D00-491F-88B2-F89793462937}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Диски.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\Лабы\Лаб. 2\Лаб2.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Диски">
+        <MSBuild Projects="Диски.dproj"/>
+    </Target>
+    <Target Name="Диски:Clean">
+        <MSBuild Projects="Диски.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Диски:Make">
+        <MSBuild Projects="Диски.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Лаб2">
+        <MSBuild Projects="..\..\Лабы\Лаб. 2\Лаб2.dproj"/>
+    </Target>
+    <Target Name="Лаб2:Clean">
+        <MSBuild Projects="..\..\Лабы\Лаб. 2\Лаб2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Лаб2:Make">
+        <MSBuild Projects="..\..\Лабы\Лаб. 2\Лаб2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Диски;Лаб2"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Диски:Clean;Лаб2:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Диски:Make;Лаб2:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

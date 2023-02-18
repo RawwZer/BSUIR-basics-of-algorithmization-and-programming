@@ -1,0 +1,183 @@
+program Диски;
+{program counts the cheapest way to buy required amount of floppies}
+
+{$APPTYPE CONSOLE}
+
+uses
+System.SysUtils;
+
+var N, I, R1, R2, R3, R4, C: integer;
+    D : array[2..3] of integer;
+    CDN : array[1..3] of real;
+    CD : array[1..3] of real;
+    CFinish: real;
+    E : boolean;
+   // N - required amount of floppies
+   // I, R1, R2, R3, R4 - auxiliary variables
+   // D - amount of floppies in each type (boxes, craters)
+   // CD - price of each type
+   // CDN - price of required amount of floppies by using only one type
+   // CFinish - price of required amount of floppies by using all types
+   // E - variable for checking errors
+   // C - variable for deviding on cases for easer outputting information
+
+begin
+// Requaring and checking variables (D[i], CD[i], N)
+  Repeat
+
+    // Trying to require variables (D[i], CD[i], N)
+    Try
+
+      Writeln('Введите кол-во дискет в коробке и ящике: ');
+      Readln(D[2], D[3]);
+      // Checking variables D[i] for positive value
+      while (D[2] < 0) or (D[3] <0) do
+      begin
+        Writeln('Введите кол-во дискет в коробке и ящике: ');
+        Readln(D[2], D[3]);
+      end;
+
+      Writeln('Введите стоимость 1 дискеты, коробки дисков и ящика: ');
+      Readln(CD[1], CD[2], CD[3]);
+      // Checking variables CD[i] for positive value
+      while (CD[1] < 0) or (CD[2] < 0) or (CD[3] < 0) do
+      begin
+        Writeln('Введите стоимость 1 дискеты, коробки дисков и ящика: ');
+        Readln(CD[1], CD[2], CD[3]);
+      end;
+
+      Writeln('Введите кол-во дискет для покупки: ');
+      Readln(N);
+      // Checking variable N for positive value
+      while N < 0 do
+      begin
+        Writeln('Введите кол-во дискет для покупки: ');
+        Readln(N);
+      end;
+
+      // Stop repeating
+      E := True;
+
+    // If user gave wrong types of variables
+    Except
+      Writeln('Введены некорректные данные!');
+      Writeln('');
+
+      // Continue repeating
+      E := False;
+    End;
+
+  Until E;
+
+  CDN[1] := (N*CD[1]);
+  CDN[2] := ((N div D[2] +1)*CD[2]);
+  CDN[3] := ((N div D[3] +1)*CD[3]);
+
+
+  // If we can use boxes and single flappies
+  // for requaring amount of flappies
+  if (N < (CD[3]/CD[2])*D[2]) and not (N < CD[2]/CD[1]) then
+  Begin
+    R1 := N div D[2];
+    CFinish := (N mod D[2])*CD[1] + CD[2]*R1;
+    C := 1;
+  End;
+
+  // If we can use craters with other types
+  // for requaring amount of flappies
+  if N > (CD[3]/CD[2])*D[2] then
+  begin
+    R2 := N div D[3];
+    R3 := N mod D[3];
+
+    // If we can use craters and single flappies
+    // for requaring amount of flappies
+    if R3 < (CD[2]/CD[1]) then
+    Begin
+      CFinish := R3*CD[1] + CD[3]*R2;
+      C := 2;
+    End
+    else
+    begin
+      R4 := R3 div D[2];
+
+      //If we can use craters and boxes
+      // for requaring amount of flappies
+      if ((R3 - R4*D[2]) > (CD[2]/CD[1])) or (R3 = R4*D[2]) then
+      Begin
+        Cfinish := CD[3]*R2 + CD[2]*(R4);
+        C := 3;
+      End
+      else
+        // If we can use all types
+        // for requaring amount of flappies
+      Begin
+        CFinish := CD[3]*R2 + CD[2]*R4 + (N - R2*D[3] - R4*D[2])*CD[1];
+        C := 4;
+      End;
+    end;
+
+  end;
+
+
+  // If it's cheaper to buy required amount of flappies by using
+  // different types
+  If ((CFinish < CDN[1]) And (CFinish < CDN[2]) and (CFinish < CDN[3])) then
+  Begin
+    case C of
+      1: begin
+           Writeln('Заданное вами кол-во дискет (',N,' шт.) можно купить ');
+           Writeln('дискетами (', (N mod D[2]),' шт.) и коробками (', R1,' шт.) ');
+           Write('за ', CFinish:7:2, ' рублей');
+          end;
+      2: begin
+           Writeln('Заданное вами кол-во дискет (',N,' шт.) можно купить ');
+           Writeln('дискетами (', (N mod D[3]),' шт.) и ящиками (', R2,' шт.)');
+           Write('за ', CFinish:7:2, ' рублей');
+          end;
+      3: begin
+           Writeln('Заданное вами кол-во дискет (',N,' шт.) можно купить ');
+           Writeln('коробками (', R4,' шт.) и ящиками (', R2,' шт.)');
+           Write('за ', CFinish:7:2, ' рублей');
+          end;
+      4: begin
+           Writeln('Заданное вами кол-во дискет (',N,' шт.) можно купить ');
+           Write('дискетами (', (N - R2*D[3] - R4*D[2]),' шт.), коробками (');
+           Write(R4,' шт.) и ящиками (', R2,' шт.) за ');
+           Write(CFinish:7:2, ' рублей');
+         end;
+    end;
+  End;
+
+
+  // If it's cheaper to buy required amount of flappies by using
+  // concrete type
+  If (CFinish > CDN[1]) or (CFinish > CDN[2]) or (CFinish > CDN[3])
+  or (CFinish = 0) then
+  Begin
+    // ... by using single flappies
+    if (CDN[1] < CDN[2]) and (CDN[1] < CDN[3]) then
+    begin
+      Writeln('Заданное вами кол-во дискет (',N,' шт.) можно купить ');
+      Write('дискетами (', N,' шт.) за ', CDN[1]:7:2, ' рублей');
+    end;
+
+    // ... by using boxes
+    If (CDN[2] < CDN[1]) and (CDN[2] < CDN[3]) then
+    begin
+      Writeln('Заданное вами кол-во дискет (',N,' шт.) можно купить ');
+      Write('коробками (', round(N/D[2]),' шт.) за ');
+      Write(CDN[2]:7:2, ' рублей');
+    end;
+
+    // ... by using craters
+    If (CDN[3] < CDN[1]) and (CDN[3] < CDN[2]) then
+    begin
+      Write('Заданное вами кол-во дискет (',N,' шт.) можно купить ');
+      Write('ящиками (', round(N/D[3]),' шт.) за ');
+      Write(CDN[3]:7:2, ' рублей');
+    end;
+  End;
+
+  readln;
+end.
