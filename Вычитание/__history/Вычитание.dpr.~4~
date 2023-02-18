@@ -1,0 +1,160 @@
+program Вычитание;
+{
+
+}
+
+uses
+  System.SysUtils;
+
+var
+  Number_1, Number_2: string;
+  I, j, Z, K, RankOfNumber, Border, LengthSum: integer;
+  L: boolean;
+  ArrayOfSum: array [1 .. 257] of integer;
+  // Number_1, Number_2 - numbers, which must be added
+  // I, J, Border - auxiliary variables for counting
+  // RunkOfNumber - intermediate value of n-digit addition of numbers
+  // LengthSum - resulting amount length
+  // Z - variable of sign of number
+  // ArrayOfSum - array to add Number_1 and Number_2
+  // L - variable to check for errors
+
+const
+  LengthA = length(ArrayOfSum) + 1;
+  // LengthA - Length ArrayOfSum
+
+begin
+
+  // Requiring the first number
+  Repeat
+    Write('Введите первое число: ');
+    readln(Number_1);
+
+    // Checking for sign of the first number
+    if Number_1[1] = '-' then
+    Begin
+      Delete(Number_1, 1, 1);
+      Z := -1;
+    End
+    else
+      z := 1;
+
+    j := length(Number_1);
+
+    // Trying convert string of the first number to array of it
+    Try
+      begin
+
+        // Inicialization from last digit to the first
+        // to array element from the end of it
+        for I := (LengthA-1) downto (LengthA - length(Number_1)) do
+        Begin
+          ArrayOfSum[I] := z*StrToInt(Number_1[j]);
+
+          j := j - 1;
+        End;
+
+        L := True;
+      end;
+    except
+      on e: EConvertError do
+      begin
+        Writeln('Вы ввели не число! Повторите попытку!');
+        Writeln('');
+
+        L := False;
+      end;
+
+    End;
+  Until L;
+
+  Repeat
+
+    // Requiring the second number
+    Write('Введите второе число: ');
+    readln(Number_2);
+
+    // Checking for sign of the second number
+    if Number_2[1] = '-' then
+    Begin
+      Delete(Number_2, 1, 1);
+      Z := -1;
+    End
+    else
+      z := 1;
+
+    J := length(Number_2);
+
+    Try
+      begin
+        // Seting the border of adding digits
+        Border := LengthA - Length(Number_2);
+
+        I := (LengthA-1);
+
+        While I >= Border do
+        Begin
+
+          // If the second number isn't over
+          If j <> 0 then
+          begin
+
+             If ArrayOfSum[I] < StrToInt(Number_2[j]) then
+             Begin
+              if ArrayOfSum[I-1] = 0 then
+              Begin
+                K := 1;
+                while (ArrayOfSum[I-K] = 0) and ((LengthA-I+K) <= Length(Number_1)) do
+                Begin
+                  ArrayOfSum[I+1-K] := ArrayOfSum[I+1-K] + 10;
+                  ArrayOfSum[I-K] := ArrayOfSum[I-K] - 1;
+                  K := K + 1;
+                End;
+              End;
+             End;
+
+             ArrayOfSum[I] := ArrayOfSum[I] - z*StrToInt(Number_2[j]);
+
+
+            // If the digit is negative to deleting the sign
+            if (ArrayOfSum[I] < 0) and (I > Border) then
+              ArrayOfSum[I] := -ArrayOfSum[I];
+
+
+            j := j - 1;
+          end;
+
+          I := I - 1;
+        End;
+
+
+        // Counting length of the sum
+        If Length(Number_2) < Length(Number_1) then
+          LengthSum := LengthSum + I + 1 - (Length(Number_1) - Length(Number_2))
+        Else
+          LengthSum := LengthSum + I + 1;
+
+        L := True;
+      end;
+
+    except
+      on e: EConvertError do
+      begin
+        Writeln('Вы ввели не число! Повторите попытку!');
+
+        L := False;
+      end;
+
+    End;
+
+  Until L;
+
+  Write('Разность чисел ', (z*StrToInt(Number_1)), ' и ');
+  Write((z*StrToInt(Number_2)), ' равна ');
+
+  // Outputting the sum
+  for I := LengthSum to (LengthA-1) do
+    Write(ArrayOfSum[I]);
+
+  readln;
+end.

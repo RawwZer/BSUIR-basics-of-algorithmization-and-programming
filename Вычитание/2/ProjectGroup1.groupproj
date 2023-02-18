@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{BD04803B-BC03-47F8-AFE9-120904842ABA}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Вычитание_2.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\1\Вычитание.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\Сложение\Сложение.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Вычитание_2">
+        <MSBuild Projects="Вычитание_2.dproj"/>
+    </Target>
+    <Target Name="Вычитание_2:Clean">
+        <MSBuild Projects="Вычитание_2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Вычитание_2:Make">
+        <MSBuild Projects="Вычитание_2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Вычитание">
+        <MSBuild Projects="..\1\Вычитание.dproj"/>
+    </Target>
+    <Target Name="Вычитание:Clean">
+        <MSBuild Projects="..\1\Вычитание.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Вычитание:Make">
+        <MSBuild Projects="..\1\Вычитание.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Сложение">
+        <MSBuild Projects="..\..\Сложение\Сложение.dproj"/>
+    </Target>
+    <Target Name="Сложение:Clean">
+        <MSBuild Projects="..\..\Сложение\Сложение.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Сложение:Make">
+        <MSBuild Projects="..\..\Сложение\Сложение.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Вычитание_2;Вычитание;Сложение"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Вычитание_2:Clean;Вычитание:Clean;Сложение:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Вычитание_2:Make;Вычитание:Make;Сложение:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
