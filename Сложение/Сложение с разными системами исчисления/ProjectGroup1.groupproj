@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{FB6F4E3E-A748-4A7F-83BD-9715FA36CDCA}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Сложение_СИ.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\Вычитание\2\Вычитание_2.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Сложение_СИ">
+        <MSBuild Projects="Сложение_СИ.dproj"/>
+    </Target>
+    <Target Name="Сложение_СИ:Clean">
+        <MSBuild Projects="Сложение_СИ.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Сложение_СИ:Make">
+        <MSBuild Projects="Сложение_СИ.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Вычитание_2">
+        <MSBuild Projects="..\..\Вычитание\2\Вычитание_2.dproj"/>
+    </Target>
+    <Target Name="Вычитание_2:Clean">
+        <MSBuild Projects="..\..\Вычитание\2\Вычитание_2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Вычитание_2:Make">
+        <MSBuild Projects="..\..\Вычитание\2\Вычитание_2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Сложение_СИ;Вычитание_2"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Сложение_СИ:Clean;Вычитание_2:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Сложение_СИ:Make;Вычитание_2:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
