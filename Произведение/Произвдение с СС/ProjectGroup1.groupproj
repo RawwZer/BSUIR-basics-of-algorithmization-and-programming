@@ -1,0 +1,84 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D072441D-3155-4554-A9B9-0FC47D6D8E58}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Произведение_СС.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Произведение\Произведение.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\Вычитание\Вычитание с разными СИ\Вычитание_СИ.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\Деление\Деление.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\Вычитание\2\Вычитание_2.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Произведение_СС">
+        <MSBuild Projects="Произведение_СС.dproj"/>
+    </Target>
+    <Target Name="Произведение_СС:Clean">
+        <MSBuild Projects="Произведение_СС.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Произведение_СС:Make">
+        <MSBuild Projects="Произведение_СС.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Произведение">
+        <MSBuild Projects="..\Произведение\Произведение.dproj"/>
+    </Target>
+    <Target Name="Произведение:Clean">
+        <MSBuild Projects="..\Произведение\Произведение.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Произведение:Make">
+        <MSBuild Projects="..\Произведение\Произведение.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Вычитание_СИ">
+        <MSBuild Projects="..\..\Вычитание\Вычитание с разными СИ\Вычитание_СИ.dproj"/>
+    </Target>
+    <Target Name="Вычитание_СИ:Clean">
+        <MSBuild Projects="..\..\Вычитание\Вычитание с разными СИ\Вычитание_СИ.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Вычитание_СИ:Make">
+        <MSBuild Projects="..\..\Вычитание\Вычитание с разными СИ\Вычитание_СИ.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Деление">
+        <MSBuild Projects="..\..\Деление\Деление.dproj"/>
+    </Target>
+    <Target Name="Деление:Clean">
+        <MSBuild Projects="..\..\Деление\Деление.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Деление:Make">
+        <MSBuild Projects="..\..\Деление\Деление.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Вычитание_2">
+        <MSBuild Projects="..\..\Вычитание\2\Вычитание_2.dproj"/>
+    </Target>
+    <Target Name="Вычитание_2:Clean">
+        <MSBuild Projects="..\..\Вычитание\2\Вычитание_2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Вычитание_2:Make">
+        <MSBuild Projects="..\..\Вычитание\2\Вычитание_2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Произведение_СС;Произведение;Вычитание_СИ;Деление;Вычитание_2"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Произведение_СС:Clean;Произведение:Clean;Вычитание_СИ:Clean;Деление:Clean;Вычитание_2:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Произведение_СС:Make;Произведение:Make;Вычитание_СИ:Make;Деление:Make;Вычитание_2:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

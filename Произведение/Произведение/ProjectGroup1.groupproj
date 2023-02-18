@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{7B5731E2-B5EA-4669-A88A-971DD732A7B8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Произведение.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Сложение\Сложение с разными системами исчисления\Сложение_СИ.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Произведение">
+        <MSBuild Projects="Произведение.dproj"/>
+    </Target>
+    <Target Name="Произведение:Clean">
+        <MSBuild Projects="Произведение.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Произведение:Make">
+        <MSBuild Projects="Произведение.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Сложение_СИ">
+        <MSBuild Projects="..\Сложение\Сложение с разными системами исчисления\Сложение_СИ.dproj"/>
+    </Target>
+    <Target Name="Сложение_СИ:Clean">
+        <MSBuild Projects="..\Сложение\Сложение с разными системами исчисления\Сложение_СИ.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Сложение_СИ:Make">
+        <MSBuild Projects="..\Сложение\Сложение с разными системами исчисления\Сложение_СИ.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Произведение;Сложение_СИ"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Произведение:Clean;Сложение_СИ:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Произведение:Make;Сложение_СИ:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
