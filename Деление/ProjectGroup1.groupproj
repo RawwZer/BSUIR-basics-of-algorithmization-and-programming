@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{3149C155-15DC-45BA-8CF3-5F68B2E04A47}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Деление_десятичная.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Произведение\Произвдение с СС\Произведение_СС.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\Лабы\Лаб. 6\календарик.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Вычитание\Вычитание с разными СИ\Вычитание_СИ.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Деление_десятичная">
+        <MSBuild Projects="Деление_десятичная.dproj"/>
+    </Target>
+    <Target Name="Деление_десятичная:Clean">
+        <MSBuild Projects="Деление_десятичная.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Деление_десятичная:Make">
+        <MSBuild Projects="Деление_десятичная.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Произведение_СС">
+        <MSBuild Projects="..\Произведение\Произвдение с СС\Произведение_СС.dproj"/>
+    </Target>
+    <Target Name="Произведение_СС:Clean">
+        <MSBuild Projects="..\Произведение\Произвдение с СС\Произведение_СС.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Произведение_СС:Make">
+        <MSBuild Projects="..\Произведение\Произвдение с СС\Произведение_СС.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="календарик">
+        <MSBuild Projects="..\..\..\Лабы\Лаб. 6\календарик.dproj"/>
+    </Target>
+    <Target Name="календарик:Clean">
+        <MSBuild Projects="..\..\..\Лабы\Лаб. 6\календарик.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="календарик:Make">
+        <MSBuild Projects="..\..\..\Лабы\Лаб. 6\календарик.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Вычитание_СИ">
+        <MSBuild Projects="..\Вычитание\Вычитание с разными СИ\Вычитание_СИ.dproj"/>
+    </Target>
+    <Target Name="Вычитание_СИ:Clean">
+        <MSBuild Projects="..\Вычитание\Вычитание с разными СИ\Вычитание_СИ.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Вычитание_СИ:Make">
+        <MSBuild Projects="..\Вычитание\Вычитание с разными СИ\Вычитание_СИ.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Деление_десятичная;Произведение_СС;календарик;Вычитание_СИ"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Деление_десятичная:Clean;Произведение_СС:Clean;календарик:Clean;Вычитание_СИ:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Деление_десятичная:Make;Произведение_СС:Make;календарик:Make;Вычитание_СИ:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
