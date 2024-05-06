@@ -1,0 +1,11 @@
+Number of cycles: 9
+1 left
+2 Down
+3 Down
+4 Down
+5 Up
+6 Down
+7 Down
+8 Down
+9 left
+981672345

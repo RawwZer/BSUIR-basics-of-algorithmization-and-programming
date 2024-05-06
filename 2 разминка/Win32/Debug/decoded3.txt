@@ -1,0 +1,13 @@
+Number of cycles: 11
+1 Down
+2 Down
+3 left
+4 Down
+5 Down
+6 Down
+7 Right
+8 Down
+9 left
+10 left
+11 Up
+145896723

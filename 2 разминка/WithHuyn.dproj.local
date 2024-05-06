@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.585,C:\Users\Рщтщк\Documents\Embarcadero\Studio\Projects\Project2.dproj=D:\Универ\Разминки\2 разминка\CodingAndDecoding.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.205,=D:\Универ\Разминки\2 разминка\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.677,D:\Универ\Разминки\2 разминка\Unit1.pas=D:\Универ\Разминки\2 разминка\SetMatrix.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.636,D:\Универ\Разминки\2 разминка\CodingAndDecoding.dproj=D:\Универ\Разминки\2 разминка\WithHuyn.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
